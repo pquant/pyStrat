@@ -1,4 +1,4 @@
-from abc import ABCMeta, abstractmethod
+
 
 ccy_list = ["USD",  "AUD", "JPY", "EUR", "GBP"]
 ######################################################################
@@ -14,9 +14,12 @@ class Ccy():
         else:
             raise ValueError(ccy_str + " is not in the list of currently accepted currencies:" + ccy_list.__str__())
 
- 
+    #Special methods
     def __str__(self):
         return self.ccy
+        
+    def __eq__(self, other):
+        return self.ccy == other.ccy
 
 class Pair():
     """ A type for currency pairs. Internally Pair stores 2 Ccy's (i.e. 2 objects of type Ccy)"""
@@ -29,11 +32,17 @@ class Pair():
             self.lhs = Ccy(lhs)
             self.rhs = Ccy(rhs)
         else:
-            raise TypeError("Expected input lhs/rhs to be of type str or Ccy."
-                             " Got type(lhs)={}, and type(rhs)={}".format([type(lhs), type(rhs)]))
+            raise TypeError("Expected input lhs/rhs to be of type str or Ccy. Got type(lhs)={0:}, and type(rhs)={1:}".format(type(lhs), type(rhs)))
+        if lhs == rhs:
+                raise ValueError("Input and lhs and rhs must be different. Got lhs==rhs==" + lhs.__str__())
+        
 
+    #Special methods
     def __str__(self):
         return self.lhs.__str__() + self.rhs.__str__()
+
+    def __eq__(self, other):
+        return (self.lhs == other.lhs) and (self.rhs == other.rhs)
             
 
 if __name__ == '__main__':
@@ -42,5 +51,3 @@ if __name__ == '__main__':
     ccy1, ccy2 = map(Ccy, [lhs, rhs])
     pair0 = Pair(lhs, rhs)
     pair1 = Pair(ccy1, ccy2)
-##    print(pair0 == pair1)
-##    print(Ccy("USD")==Ccy("USD"))
