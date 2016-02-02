@@ -1,4 +1,8 @@
+# -*- coding: utf-8 -*-
 
+"""
+Definition of various asset-class types
+"""
 ######################################################################
 ## Currently supported
 ######################################################################
@@ -97,10 +101,3 @@ class EQ_Idx():
 def _unsupportedItem_error(x, supported_list):
     return  x + " is not currently supported. The supported list is :" + supported_list.__str__()
     
-
-if __name__ == '__main__':
-#def main():
-    lhs, rhs = "AUD","JPY"
-    ccy1, ccy2 = map(Ccy, [lhs, rhs])
-    pair0 = Pair(lhs, rhs)
-    pair1 = Pair(ccy1, ccy2)
