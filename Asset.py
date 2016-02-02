@@ -1,21 +1,29 @@
 
-
-ccy_list = ["USD",  "AUD", "JPY", "EUR", "GBP"]
 ######################################################################
-## FX types
+## Currently supported
+######################################################################
+_ccy_list = ["USD",  "AUD", "JPY", "EUR", "GBP"]
+_agro_list = ["Coffee", "Cocoa"]
+_eq_idx_list = ["FTSE100", "S&P"]
+
+supported_list = {'ccy' : _ccy_list,
+                  'agro' : _agro_list,
+                  'eq_idx' : _eq_idx_list}
+######################################################################
+## FX asset-class types
 ######################################################################
 
 class Ccy():
     """ A type for individual currencies"""
 
-    def __init__(self,ccy_str):
-        if ccy_str in ccy_list:
-            self.ccy = ccy_str
+    def __init__(self,ccy):
+        if ccy in _ccy_list:
+            self.ccy = ccy
         else:
-            raise ValueError(ccy_str + " is not in the list of currently accepted currencies:" + ccy_list.__str__())
+            raise ValueError(_unsupportedItem_error(ccy, _ccy_list))
 
     #Special methods
-    def __str__(self):
+    def __repr__(self):
         return self.ccy
         
     def __eq__(self, other):
@@ -38,12 +46,57 @@ class Pair():
         
 
     #Special methods
-    def __str__(self):
+    def __repr__(self):
         return self.lhs.__str__() + self.rhs.__str__()
 
     def __eq__(self, other):
         return (self.lhs == other.lhs) and (self.rhs == other.rhs)
             
+######################################################################
+## CM asset-class types
+######################################################################
+class Agro():
+    """ A type for the agriculture asset-class type"""
+
+    def __init__(self,agro):
+        if agro in _agro_list:
+            self.agro = agro
+        else:
+            raise ValueError(_unsupportedItem_error(agro, _agro_list))
+
+    #Special methods
+    def __repr__(self):
+        return self.agro
+
+    def __eq__(self, other):
+        return (self.agro == other.agro)
+    
+######################################################################
+## EQ asset-class types
+######################################################################
+class EQ_Idx():
+    """ A type for the Equity Index asset-class type"""
+
+    def __init__(self,eq_idx):
+        if eq_idx in _eq_idx_list:
+            self.eq_idx = eq_idx
+        else:
+            raise ValueError(_unsupportedItem_error(eq_idx, _eq_idx_list))
+
+    #Special methods
+    def __repr__(self):
+        return self.agro
+
+    def __eq__(self, other):
+        return (self.agro == other.agro)
+
+
+######################################################################
+## Utils
+######################################################################
+def _unsupportedItem_error(x, supported_list):
+    return  x + " is not currently supported. The supported list is :" + supported_list.__str__()
+    
 
 if __name__ == '__main__':
 #def main():
