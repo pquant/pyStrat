@@ -8,13 +8,13 @@ Definition of various market types
 # A Spot Market
 # TODO : Should we call that Cash?
 ################################################################################
-class Spot():
+class Spot:
     pass
 
 ################################################################################
 # A Futures Market
 ################################################################################
-class Futures():
+class Futures:
     def __init__(self, contract):
         if not isinstance(contract, Contract):
             raise TypeError("A Futures Market object is constructed with a contract of type Contract. Got "
@@ -27,8 +27,9 @@ class Futures():
 
     def __eq__(self, other):
         return self.contract == other.contract
-        
-class Contract():
+
+
+class Contract:
     """ 
     Futures contract type
     Traditional Contract() instantiation forbidden. Alternative constructors are Contract.active() and Contract.month('someMonth') instead

@@ -6,7 +6,7 @@ Definition of various asset-class types
 ######################################################################
 ## Currently supported
 ######################################################################
-_ccy_list = ["USD",  "AUD", "JPY", "EUR", "GBP"]
+_ccy_list = ["USD", "AUD", "JPY", "EUR", "GBP"]
 _agro_list = ["Coffee", "Cocoa"]
 _eq_idx_list = ["FTSE100", "S&P"]
 
@@ -29,7 +29,7 @@ class Ccy():
     #Special methods
     def __repr__(self):
         return self.ccy
-        
+
     def __eq__(self, other):
         return self.ccy == other.ccy
 
@@ -47,7 +47,7 @@ class Pair():
             raise TypeError("Expected input lhs/rhs to be of type str or Ccy. Got type(lhs)={0:}, and type(rhs)={1:}".format(type(lhs), type(rhs)))
         if lhs == rhs:
                 raise ValueError("Input and lhs and rhs must be different. Got lhs==rhs==" + lhs.__str__())
-        
+
 
     #Special methods
     def __repr__(self):
@@ -55,7 +55,7 @@ class Pair():
 
     def __eq__(self, other):
         return (self.lhs == other.lhs) and (self.rhs == other.rhs)
-            
+
 ######################################################################
 ## CM asset-class types
 ######################################################################
@@ -74,7 +74,7 @@ class Agro():
 
     def __eq__(self, other):
         return (self.agro == other.agro)
-    
+
 ######################################################################
 ## EQ asset-class types
 ######################################################################
@@ -100,4 +100,4 @@ class EQ_Idx():
 ######################################################################
 def _unsupportedItem_error(x, supported_list):
     return  x + " is not currently supported. The supported list is :" + supported_list.__str__()
-    
+
