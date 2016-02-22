@@ -1,6 +1,6 @@
 
 
-class FixTy:
+class Fix:
 
     @classmethod
     def open(cls):
@@ -33,6 +33,10 @@ class FixTy:
     @classmethod
     def fixes(cls, times):
         c = cls.__new__(cls)
-        c.fixFlag = "HIGH"
+        c.fixFlag = "FIX"
         c.fixTimes = times
         return c
+
+    def __repr__(self):
+        return self.fixFlag if self.fixTimes is None else self.fixFlag + self.fixTimes.__repr__()
+
