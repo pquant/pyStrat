@@ -36,7 +36,7 @@ class Contract:
     TODO: Define a separate type for Months? Z15 might feel universal because everyone uses Bloomberg, but some other source might have it 
     represented in a different way, say 'Dec2015'
     """
-    def __init__(self,*args):
+    def __init__(self, *args):
         raise SyntaxError("A Contract cannot be instantiated with the traditional Contract(...) function." 
                         + "Please use tailor-made instantiations instead - "
                         + "for active contracts (Contract.active()) and contracts of a certain month (e.g. Contract.month('Z1'))")
