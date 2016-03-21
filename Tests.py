@@ -20,6 +20,7 @@ class AssetTests(ut.TestCase):
     def test_ccy_equality(self):
         self.assertEqual(Ccy("USD"), Ccy("USD"))
         
+@ut.skip('This is work in progress')
 class PairTests(ut.TestCase):
     """Test Asset module"""
     def test_pair_construction_inconsistent_inputs(self):
@@ -27,7 +28,8 @@ class PairTests(ut.TestCase):
 
     def test_pair_construction_lhs_equals_rhs(self):
         self.assertRaises(ValueError, Pair, "USD", "USD")
-        
+
+    # @ut.skip('This is work in progress')
     def test_pair_equality(self):
         self.assertEqual(Pair("AUD","JPY"), Pair("AUD","JPY"))
         
