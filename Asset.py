@@ -6,15 +6,15 @@ Definition of various asset-class types
 ######################################################################
 ## Currently supported
 ######################################################################
-_ccy_list = ["USD", "AUD", "JPY", "EUR", "GBP"]
-_agro_list = ["Coffee", "Cocoa"]
-_eq_idx_list = ["FTSE100", "S&P"]
+_ccy_list = ['USD', 'AUD', 'JPY', 'EUR', 'GBP', 'NZD']
+_agro_list = ['Coffee', 'Cocoa']
+_eq_idx_list = ['FTSE100', 'S&P']
 
 supported_list = {'ccy' : _ccy_list,
                   'agro' : _agro_list,
                   'eq_idx' : _eq_idx_list}
 ######################################################################
-## FX asset-class types
+# FX asset-class types
 ######################################################################
 
 class Ccy():
@@ -99,5 +99,5 @@ class EQ_Idx():
 ## Utils
 ######################################################################
 def _unsupportedItem_error(x, supported_list):
-    return  x + " is not currently supported. The supported list is :" + supported_list.__str__()
+    return x + " is not currently supported. The supported list is :" + supported_list.__str__()
 
