@@ -18,7 +18,9 @@ supported_list = {'ccy' : _ccy_list,
 ######################################################################
 
 class Ccy():
-    """A type for individual currencies"""
+    """
+    A type for individual currencies
+    """
 
     def __init__(self,ccy):
         if ccy in _ccy_list:
@@ -34,7 +36,9 @@ class Ccy():
         return self.ccy == other.ccy
 
 class Pair():
-    """A type for currency pairs. Internally Pair stores 2 Ccy's (i.e. 2 objects of type Ccy)"""
+    """
+    A type for currency pairs. Internally Pair stores 2 Ccy's (i.e. 2 objects of type Ccy)
+    """
 
     def __init__(self, lhs, rhs):
         if isinstance(lhs,Ccy) and isinstance(rhs,Ccy):
@@ -60,7 +64,9 @@ class Pair():
 ## CM asset-class types
 ######################################################################
 class Agro():
-    """A type for the agriculturals"""
+    """
+    A type for the agriculturals
+    """
 
     def __init__(self,agro):
         if agro in _agro_list:
@@ -79,8 +85,9 @@ class Agro():
 ## EQ asset-class types
 ######################################################################
 class EQ_Idx():
-    """ A type for the Equity Indices"""
-
+    """
+    A type for the Equity Indices
+    """
     def __init__(self,eq_idx):
         if eq_idx in _eq_idx_list:
             self.eq_idx = eq_idx

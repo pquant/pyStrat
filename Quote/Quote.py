@@ -5,6 +5,7 @@ Interface for retrieving market quotess
 from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 from Fix import Fix
+from pandas import DataFrame
 
 """
 A Ticker named tuple to store label to query source. Also contains a Bool to be used in case resulting data needs to be
@@ -19,10 +20,12 @@ class QuoteInterface(metaclass=ABCMeta):
     @abstractmethod
     def __init__(self, asset, market, source):
         """
-        Constructor for any class implementing QuoteInterface. Expects an asset type, a market type, and a source type
-        :param asset: e.g. Asset.Pair
-        :param market: e.g. Market.Spot
-        :param source: e.g. Source.YahooFinance
+        Constructor for any class implementing QuoteInterface.
+        Expects an asset type (see Asset.py), a market type (see Market.py), and a source type (see Source.py)
+
+        :param asset: e.g. :class:`pyStrat.Asset.Pair`
+        :param market: e.g. :class:`pyStrat.Market.Spot`
+        :param source: e.g. :class:`pyStrat.Source.Quandl`
         :return: An instance of the class that implements the QuoteInterface
         """
         pass
@@ -30,19 +33,21 @@ class QuoteInterface(metaclass=ABCMeta):
     @abstractmethod
     def tickers(self) -> [Ticker]:
         """
-        Tickers with an 's' because we might need more than 1.
+        Returns the list of tickers (because we might need more than 1) required to query source.
         Example: EURJPY should break down into EURUSD and USDJPY rather than fetch data from a source for EURJPY.
-        2 reason for that : the source might not have it, while it's much more likely to have the USD crosses, and above
+        There are two reason for that : the source might not have it, while it's much more likely to have the USD crosses, and above
         all, it might not be consistent with EURUSD and USDJPY.
-        :return: a list of Tickers
+
+        :return: [Ticker]
         """
         pass
 
     @abstractmethod
     # def series(self, start, end, bid_ask='MID', fix=Fix.close()):
-    def series(self, start, end, fix=Fix.close(), bid_ask='MID'):
+    def series(self, start: str, end: str, fix: Fix =Fix.close(), bid_ask: str='MID') -> DataFrame:
         """
         TODO : doc and annotations
+
         :param start:
         :param end:
         :param fix:

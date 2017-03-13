@@ -24,7 +24,9 @@ class FXSpotQuandl(QuoteInterface):
         return [Ticker(Source.quandl_code(p), FxUtils.is_inverted(p)) for p in pairs]
 
     def series(self, start, end, fix, bid_ask):
-        pass
+        # FIXME : works for market convention USD crosses for now
+        tckr, = self.tickers()
+        return Quandl.get(tckr.name, start_date=start, end_date=end)
 
         # return Quandl.get(self.ticker(), start_date=start, end_date=end)
 
