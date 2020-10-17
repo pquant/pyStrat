@@ -1,11 +1,4 @@
-# -*- coding: utf-8 -*-
 
-"""
-Definition of various asset-class types
-"""
-######################################################################
-## Currently supported
-######################################################################
 _ccy_list = ['USD', 'AUD', 'JPY', 'EUR', 'GBP', 'NZD']
 _agro_list = ['Coffee', 'Cocoa']
 _eq_idx_list = ['FTSE100', 'S&P']

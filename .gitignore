@@ -5,4 +5,5 @@
 *~
 __pycache__/
 .idea/
-Z.py
+.mypy_cache/
+venv/
