@@ -17,11 +17,15 @@ class FXSpotQuandl(QuoteInterface):
         # cache asset, market, source
         self.asset, self.market, self.source = asset, market, source
         # Type checks
-        Quote.Utils.check_quote_types(self, Asset.Pair, Market.Spot, Source.Quandl)
+        Quote.Utils.check_quote_types(self, Asset.Pair, Market.Spot,
+                                      Source.Quandl)
 
     def tickers(self):
         pairs = FxUtils.split_to_usd_crosses(self.asset)
-        return [Ticker(Source.quandl_code(p), FxUtils.is_inverted(p)) for p in pairs]
+        return [
+            Ticker(Source.quandl_code(p), FxUtils.is_inverted(p))
+            for p in pairs
+        ]
 
     def series(self, start, end, fix, bid_ask):
         # FIXME : works for market convention USD crosses for now
@@ -29,6 +33,7 @@ class FXSpotQuandl(QuoteInterface):
         return Quandl.get(tckr.name, start_date=start, end_date=end)
 
         # return Quandl.get(self.ticker(), start_date=start, end_date=end)
+
 
 """
 List of registered classes

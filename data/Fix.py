@@ -1,7 +1,4 @@
-
-
 class Fix:
-
     @classmethod
     def open(cls):
         c = cls.__new__(cls)
@@ -38,5 +35,5 @@ class Fix:
         return c
 
     def __repr__(self):
-        return self.fixFlag if self.fixTimes is None else self.fixFlag + self.fixTimes.__repr__()
-
+        return self.fixFlag if self.fixTimes is None else self.fixFlag + self.fixTimes.__repr__(
+        )

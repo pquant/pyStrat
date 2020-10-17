@@ -9,7 +9,6 @@ import copy
 #                     ()]
 
 
-
 def is_usd_cross(pair: Pair) -> bool:
     """
     Checks if input pair is a USD cross
@@ -23,6 +22,7 @@ def is_usd_cross(pair: Pair) -> bool:
 def is_inverted(pair: Pair) -> bool:
     pair_conv = quote_convention(pair)
     return pair != pair_conv
+
 
 """
 List of currencies XXX whose USD-cross is quoted XXXUSD (as the vast majority of USD crosses will be quoted USDXXX)
@@ -44,7 +44,8 @@ def quote_convention(pair) -> Pair:
             if rhs in map(Ccy, usd_crosses_exceptions):
                 return Pair(rhs, lhs)
             else:
-                return copy.deepcopy(pair)  # meh...might as well write Pair(pair.lhs, pair.rhs)
+                return copy.deepcopy(
+                    pair)  # meh...might as well write Pair(pair.lhs, pair.rhs)
         elif rhs == usd:
             if lhs in map(Ccy, usd_crosses_exceptions):
                 return copy.deepcopy(pair)
@@ -80,7 +81,7 @@ def split_to_usd_crosses(pair: Pair) -> [Pair]:
     :return: a 1- or 2- element list of Asset.Pairs
     """
     if is_usd_cross(pair):
-        return [pair]     # returning input object here
+        return [pair]  # returning input object here
     else:
         usd = Ccy('USD')
         return [Pair(pair.lhs, usd), Pair(usd, pair.rhs)]

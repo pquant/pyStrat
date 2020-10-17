@@ -2,6 +2,7 @@
 Various utility functions
 """
 
+
 def check_quote_types(obj, *target_tys):
     """
     Used to raise TypeErrors when instantiating QuoteInterface from Quote.py
@@ -13,9 +14,15 @@ def check_quote_types(obj, *target_tys):
     obj_asset, obj_market, obj_source = obj.asset, obj.market, obj.source
 
     if not isinstance(obj.asset, targ_asset_ty):
-        raise TypeError('Expected asset of type {0}, got object {1} of type {2}'.format(targ_asset_ty, obj_asset, type(obj_asset)))
+        raise TypeError(
+            'Expected asset of type {0}, got object {1} of type {2}'.format(
+                targ_asset_ty, obj_asset, type(obj_asset)))
     if not isinstance(obj.market, targ_market_ty):
-        raise TypeError('Expected market of type {0}, got object {1} of type {2}'.format(targ_market_ty, obj_market, type(obj_market)))
+        raise TypeError(
+            'Expected market of type {0}, got object {1} of type {2}'.format(
+                targ_market_ty, obj_market, type(obj_market)))
     if not isinstance(obj.source, targ_source_ty):
-        raise TypeError('Expected source of type {0}, got object {1} of type {2}'.format(targ_source_ty, obj_source, type(obj_source)))
+        raise TypeError(
+            'Expected source of type {0}, got object {1} of type {2}'.format(
+                targ_source_ty, obj_source, type(obj_source)))
     return None

@@ -6,12 +6,12 @@ from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 from Fix import Fix
 from pandas import DataFrame
-
 """
 A Ticker named tuple to store label to query source. Also contains a Bool to be used in case resulting data needs to be
 inverted - e.g. JPYUSD instead of USDJPY. Most of the time though, it won't be necessary, so defaults to None
 """
 Ticker = namedtuple('Ticker', 'name inverted')
+
 
 class QuoteInterface(metaclass=ABCMeta):
     """
@@ -44,7 +44,11 @@ class QuoteInterface(metaclass=ABCMeta):
 
     @abstractmethod
     # def series(self, start, end, bid_ask='MID', fix=Fix.close()):
-    def series(self, start: str, end: str, fix: Fix =Fix.close(), bid_ask: str='MID') -> DataFrame:
+    def series(self,
+               start: str,
+               end: str,
+               fix: Fix = Fix.close(),
+               bid_ask: str = 'MID') -> DataFrame:
         """
         TODO : doc and annotations
 
