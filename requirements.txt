@@ -1,3 +1,5 @@
 pre-commit
 yapf
 dataclasses
+quandl
+matplotlib

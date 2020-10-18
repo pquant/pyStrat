@@ -1,42 +1,46 @@
+from dataclasses import dataclass
 import os
-import Asset
+from pathlib import Path
+
+from data.ccy import CcyPair
 import Quote.FX.Utils as FxUtils
 
 
-class CSV:
-    def __init__(self, repo):
-        if not os.path.isdir(repo):
+class Source:
+    pass
+
+
+@dataclass(frozen=True)
+class CSV(Source):
+    filepath: Path
+
+    def __post_init(self):
+        if not self.filepath.exists():
             ValueError("Input directory {} is invalid".format(repo))
-        self.repo = repo
-        self.fileName = None
 
 
-class Quandl:
-    def __init__(self, authtoken):
-        self.authtoken = authtoken
+@dataclass(frozen=True)
+class Quandl(Source):
+    authtoken: str
 
+    @staticmethod
+    def quandl_db(cls: type) -> str:
+        # Name of the Quandl db associated with asset.
+        # See 'Quandl Code' section of https://www.quandl.com/blog/getting-started-with-the-quandl-api
+        if cls == CcyPair: return 'CUR'
+        else:
+            raise ValueError(f'no known Quandl DB for: {cls}')
 
-###################################################################################
-# Quandl Utils
-###################################################################################
-def quandl_db(asset) -> str:
-    """
-    Name of the Quandl db associated with asset.
-    See the 'Quandl Code' section of https://www.quandl.com/blog/getting-started-with-the-quandl-api
-    :param asset: An asset object with type defined in Asset.py
-    :return: The name of the associated db, as a str
-    """
-    if isinstance(asset, Asset.Pair):
-        return 'CUR'
+    @staticmethod
+    def quandl_code(obj: Any) -> str:
 
+        if type(obj) == CcyPair:
 
-def quandl_code(asset) -> str:
+            lhs, rhs = obj
 
-    if isinstance(asset, Asset.Pair):
-        if not FxUtils.is_usd_cross(asset):
-            raise ValueError(
-                'Use of Quandl source for ccy pairs requires USD crosses only, got {}'
-                .format(asset))
-        # Since this a USD cross, only expect 1 ccy when unpacking
-        non_usd_ccy, = FxUtils.non_usd_currencies(asset)
-        return quandl_db(asset) + '/' + non_usd_ccy.__str__()
+            if not obj.is_USD_cross():
+                raise ValueError(
+                    f'Quandl only accepts USD crosses, got {lhs}/{rhs}')
+
+            non_USD_ccy = rhs if lhs is Ccy.USD else lhs
+            return f'{quandl_db(CcyPair)}/{non_usd_ccy}'
